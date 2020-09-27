@@ -44,31 +44,69 @@ class Logger:
         # Insert doc into collection
         self.db.collection.insert_one(document)
 
-    def view_log_line(self, document):
+    def generate_log_line(self, document, color=False):
         """Make log view"""
+        # Gets filename of logged file
         filename = document["file"]
+        # Gets line number of log
         linenum = document["line"]
-        # Get tag and make yellow
-        tag = colored(document["tag"], "yellow")
-        # Get message from document
+        # Get message
         message = document["message"]
         # Get time and convert it to arrow
         time = arrow.get(document['time'])
-        # Get time in full format
+        # Get time with full format
         full = time.format('HH:mm:ss MM-DD-YY')
-        # Get short human readable time
-        short = colored(time.humanize(), "green")
+        # Return items with color if color is selected
+        if color:
+            tag = colored(document["tag"], "yellow")
+            short = colored(time.humanize(), "green")
+            location = colored(f"{filename}::{linenum}", 'blue')
+        else:
+            # Returns items without colors
+            tag = document["tag"]
+            short = time.humanize()
+            location = f"{filename}::{linenum}"
         # Return string in readable format
-        location = colored(f"{filename}::{linenum}", 'blue')
         return f"{tag}\t{full} {location} {short} {message}"
+
+    def check_by_time(self, metric, amount):
+        """Check item by time"""
+        now = arrow.utcnow()
+        if metric == "minutes":
+            then = now.shift(minutes=-amount)
+        elif metric == "hours":
+            then = now.shift(hours=-amount)
+        elif metric == "days":
+            then = now.shift(days=-amount)
+        logs = self.db.collection.find({})
+        for log in logs:
+            if then < arrow.get(log["time"]):
+                print(self.generate_log_line(log, True))
+
+    def search_logs_by_tag(self, tag: str):
+        """Search log by tag name"""
+        logs = self.db.collection.find({"tag": tag})
+        for log in logs:
+            print(self.generate_log_line(log, True))
+
+    def clear_data(self):
+        """Clear data"""
+        clear = input("Clear all logs? [Y/n]: ")
+        if clear.upper() == "Y":
+            self.db.database.drop_collection("collection")
+            print("All logs cleared")
+        else:
+            print("No data cleared")
 
     def export_log(self, filename):
         """Export log to file"""
         with open(filename, 'w') as file:
             for x in self.db.collection.find({}):
-                file.write(self.view_log_line(x) + "\n")
+                # Write lines of will without color
+                file.write(self.generate_log_line(x) + "\n")
 
     def view_log(self):
         """View each log item"""
         for x in self.db.collection.find({}):
-            print(self.view_log_line(x))
+            # Printes lines with color
+            print(self.generate_log_line(x, True))
