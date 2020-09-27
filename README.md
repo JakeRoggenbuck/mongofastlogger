@@ -49,4 +49,14 @@ viewer.search_logs_by_tag("Something")
 viewer.check_by_time("days", 3)
 # Export logs to example.log
 viewer.export_log("example.log")
+
+print("Production")
+
+# Make logger with name
+production_logger = Logger("Production")
+production_logger.log("Error", "Critical error in production")
+
+# Make viewer with name
+production_viewer = LogViewer("Production")
+production_viewer.view_log()
 ```

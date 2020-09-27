@@ -6,23 +6,24 @@ import arrow
 
 
 class Database:
-    def __init__(self, location: str = "localhost", port: int = 27017):
+    def __init__(self, name: str, location: str = "localhost", port: int = 27017):
         """Set default location and port"""
         self.location = location
         self.port = port
+        self.collection_name = name
         self.connect()
 
     def connect(self):
         """Nake client, database, and collection"""
         self.client = MongoClient(self.location, self.port)
         self.database = self.client.logging_test_db
-        self.collection = self.database.collection
+        self.collection = self.database[self.collection_name]
 
 
 class Logger:
-    def __init__(self):
+    def __init__(self, collection: str = "logs"):
         """Setup database"""
-        self.db = Database()
+        self.db = Database(collection)
 
     def time(self):
         """Get data and time"""
@@ -52,9 +53,9 @@ class Logger:
 
 
 class LogViewer:
-    def __init__(self):
+    def __init__(self, collection: str = "logs"):
         """Setup database"""
-        self.db = Database()
+        self.db = Database(collection)
 
     def generate_log_line(self, document: dict, color: bool = False):
         """Make log view"""
