@@ -28,7 +28,7 @@ class Logger:
         """Get data and time"""
         return datetime.utcnow()
 
-    def log(self, tag: str, message: str):
+    def log(self, tag: str, message: str, display: bool = False):
         """Add item to log"""
         cf = currentframe()
         linenum = cf.f_back.f_lineno
@@ -43,6 +43,12 @@ class Logger:
         }
         # Insert doc into collection
         self.db.collection.insert_one(document)
+        if display:
+            print(self.display_logged_message(tag, message))
+
+    def display_logged_message(self, tag: str, message: str):
+        ctag = colored(tag, 'yellow')
+        return f"Logged: {ctag} {message}"
 
 
 class LogViewer:
@@ -50,7 +56,7 @@ class LogViewer:
         """Setup database"""
         self.db = Database()
 
-    def generate_log_line(self, document, color=False):
+    def generate_log_line(self, document: dict, color: bool = False):
         """Make log view"""
         # Gets filename of logged file
         filename = document["file"]
@@ -75,7 +81,7 @@ class LogViewer:
         # Return string in readable format
         return f"{tag}\t{full} {location} {short} {message}"
 
-    def check_by_time(self, metric, amount):
+    def check_by_time(self, metric: str, amount: int):
         """Check item by time"""
         print(f"Viewing logs in the last {amount} {metric}")
         now = arrow.utcnow()
@@ -106,7 +112,7 @@ class LogViewer:
         else:
             print("No data cleared")
 
-    def export_log(self, filename):
+    def export_log(self, filename: str):
         """Export log to file"""
         with open(filename, 'w') as file:
             for x in self.db.collection.find({}):

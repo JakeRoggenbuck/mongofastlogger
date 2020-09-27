@@ -4,6 +4,8 @@ from main import Logger, LogViewer
 logger = Logger()
 logger.log("Something", "This is bad as well i guess but i dont actually know")
 
+logger.log("Something", "This is a message", display=True)
+
 viewer = LogViewer()
 viewer.view_log()
 
