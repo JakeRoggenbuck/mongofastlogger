@@ -1,4 +1,5 @@
 # Logger
+A simple and fask logging library that uses the power of mongodb to save and query logs (with built in cli)
 
 ## Cli
 ### search
@@ -28,7 +29,7 @@ help with specific commands<br>
 
 ## Library
 ```py
-from main import Logger, LogViewer
+from mongofastlogger.logger import LogViewer, Logger
 
 
 # Make logger

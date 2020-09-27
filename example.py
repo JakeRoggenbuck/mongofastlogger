@@ -1,4 +1,4 @@
-from main import Logger, LogViewer
+from mongofastlogger.logger import Logger, LogViewer
 
 
 # Make logger

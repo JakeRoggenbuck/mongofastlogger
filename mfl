@@ -1,9 +1,10 @@
+#!/usr/bin/env python3
 import fire
-import main
+from mongofastlogger.logger import LogViewer, Logger
 
 
-LOGGER = main.Logger()
-VIEWER = main.LogViewer()
+LOGGER = Logger()
+VIEWER = LogViewer()
 
 
 class Serpent(object):
