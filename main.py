@@ -44,6 +44,12 @@ class Logger:
         # Insert doc into collection
         self.db.collection.insert_one(document)
 
+
+class LogViewer:
+    def __init__(self):
+        """Setup database"""
+        self.db = Database()
+
     def generate_log_line(self, document, color=False):
         """Make log view"""
         # Gets filename of logged file
@@ -71,6 +77,7 @@ class Logger:
 
     def check_by_time(self, metric, amount):
         """Check item by time"""
+        print(f"Viewing logs in the last {amount} {metric}")
         now = arrow.utcnow()
         if metric == "minutes":
             then = now.shift(minutes=-amount)
@@ -86,6 +93,7 @@ class Logger:
     def search_logs_by_tag(self, tag: str):
         """Search log by tag name"""
         logs = self.db.collection.find({"tag": tag})
+        print(f"Logs with tag: {tag}")
         for log in logs:
             print(self.generate_log_line(log, True))
 
@@ -104,6 +112,7 @@ class Logger:
             for x in self.db.collection.find({}):
                 # Write lines of will without color
                 file.write(self.generate_log_line(x) + "\n")
+        print(f"File written to {filename}")
 
     def view_log(self):
         """View each log item"""
