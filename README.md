@@ -3,28 +3,30 @@ A simple and fask logging library that uses the power of mongodb to save and que
 
 ## Cli
 ### search
-`search <tag>`<br>
+`search <tag> <logger_name>`<br>
 `python3 runner.py search Info`<br>
 ### clear
-`clear`
+`clear <logger_name>`<br>
 `python3 runner.py clear`<br>
 ### log
-`log <tag> <message>`
+`log <tag> <message> <logger_name>`<br>
 `python3 runner.py log Info "This is a log message"`<br>
 ### view
-`view`
+`view <logger_name>`<br>
 `python3 runner.py view`<br>
 ### export
-`export <filename>`
+`export <filename> <logger_name>`<br>
 `python3 runner.py export filename.log`<br>
 ### last
-`last <metric> <amount>`
+`last <metric> <amount> <logger_name>`<br>
 `python3 runner.py last hours 3`<br>
 ### help
 find commands<br>
 `python3 runner.py`<br>
 help with specific commands<br>
 `python3 runner.py command --help`<br>
+### other info
+`<logger_name>` is optional and is `logs` by default
 
 
 ## Library

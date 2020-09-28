@@ -3,28 +3,34 @@ import fire
 from mongofastlogger.logger import LogViewer, Logger
 
 
-LOGGER = Logger()
-VIEWER = LogViewer()
-
-
 class Serpent(object):
-    def search(self, tag):
-        VIEWER.search_logs_by_tag(tag)
+    def make_view_and_log(self, name):
+        self.logger = Logger(name)
+        self.viewer = LogViewer(name)
 
-    def clear(self):
-        VIEWER.clear_data()
+    def search(self, tag, logger_name="logs"):
+        self.make_view_and_log(logger_name)
+        self.viewer.search_logs_by_tag(tag)
 
-    def log(self, tag, message):
-        LOGGER.log(tag, message)
+    def clear(self, logger_name="logs"):
+        self.make_view_and_log(logger_name)
+        self.viewer.clear_data()
 
-    def view(self):
-        VIEWER.view_log()
+    def log(self, tag, message, logger_name="logs"):
+        self.make_view_and_log(logger_name)
+        self.logger.log(tag, message)
 
-    def export(self, filename):
-        VIEWER.export_log(filename)
+    def view(self, logger_name="logs"):
+        self.make_view_and_log(logger_name)
+        self.viewer.view_log()
 
-    def last(self, metric, amount):
-        VIEWER.check_by_time(metric, amount)
+    def export(self, filename, logger_name="logs"):
+        self.make_view_and_log(logger_name)
+        self.viewer.export_log(filename)
+
+    def last(self, metric, amount, logger_name="logs"):
+        self.make_view_and_log(logger_name)
+        self.viewer.check_by_time(metric, amount)
 
 
 if __name__ == "__main__":
