@@ -104,14 +104,17 @@ class LogViewer:
         for log in logs:
             print(self.generate_log_line(log, True))
 
-    def clear_data(self):
+    def clear_data(self, ask=True):
         """Clear data"""
-        clear = input("Clear all logs? [Y/n]: ")
-        if clear.upper() == "Y":
-            self.db.database.drop_collection("collection")
-            print("All logs cleared")
+        if ask:
+            clear = input("Clear all logs? [Y/n]: ")
+            if clear.upper() == "Y":
+                self.db.database.drop_collection(self.db.collection)
+                print("All logs cleared")
+            else:
+                print("No data cleared")
         else:
-            print("No data cleared")
+            self.db.database.drop_collection(self.db.collection)
 
     def export_log(self, filename: str):
         """Export log to file"""
