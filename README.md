@@ -63,3 +63,6 @@ production_logger.log("Error", "Critical error in production")
 production_viewer = LogViewer("Production")
 production_viewer.view_log()
 ```
+
+### Todo
+Make readme more easy to read, especially comments in code and command line instructions
