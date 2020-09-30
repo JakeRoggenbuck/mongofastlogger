@@ -14,7 +14,7 @@ class Database:
         self.connect()
 
     def connect(self):
-        """Nake client, database, and collection"""
+        """Make client, database, and collection"""
         self.client = MongoClient(self.location, self.port)
         self.database = self.client.logging_test_db
         self.collection = self.database[self.collection_name]
