@@ -2,7 +2,7 @@
 A simple and fask logging library that uses the power of mongodb to save and query logs (with built in cli)
 
 ## Cli
-```py
+```sh
 # search
 search <tag> <logger_name>
 python3 runner.py search Info
