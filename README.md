@@ -2,32 +2,41 @@
 A simple and fask logging library that uses the power of mongodb to save and query logs (with built in cli)
 
 ## Cli
-### search
-`search <tag> <logger_name>`<br>
-`python3 runner.py search Info`<br>
-### clear
-`clear <logger_name>`<br>
-`python3 runner.py clear`<br>
-### log
-`log <tag> <message> <logger_name>`<br>
-`python3 runner.py log Info "This is a log message"`<br>
-### view
-`view <logger_name>`<br>
-`python3 runner.py view`<br>
-### export
-`export <filename> <logger_name>`<br>
-`python3 runner.py export filename.log`<br>
-### last
-`last <metric> <amount> <logger_name>`<br>
-`python3 runner.py last hours 3`<br>
-### help
-find commands<br>
-`python3 runner.py`<br>
-help with specific commands<br>
-`python3 runner.py command --help`<br>
-### other info
-`<logger_name>` is optional and is `logs` by default
+```py
+# search
+search <tag> <logger_name>
+python3 runner.py search Info
 
+# clear
+clear <logger_name>
+python3 runner.py clear
+
+# log
+log <tag> <message> <logger_name>
+python3 runner.py log Info "This is a log message"
+
+# view
+view <logger_name>
+python3 runner.py view
+
+# export
+export <filename> <logger_name>
+python3 runner.py export filename.log
+
+# last
+last <metric> <amount> <logger_name>
+python3 runner.py last hours 3
+
+# help
+find commands
+python3 runner.py
+
+help with specific commands
+python3 runner.py command --help
+
+# other info
+<logger_name> is optional and is 'logs' by default
+```
 
 ## Library
 ```py

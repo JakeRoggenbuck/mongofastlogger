@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='mongofastlogger',
-      version='0.3',
+      version='0.4',
       description='A simple and fask logging library that uses the power of mongodb to save and query logs (with built in cli)',
       long_description=long_description,
       long_description_content_type="text/markdown",
