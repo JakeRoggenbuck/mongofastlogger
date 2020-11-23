@@ -74,7 +74,7 @@ production_viewer.view_log()
 ```
 
 ### Todo
-Make readme more easy to read, especially comments in code and command line instructions
+Make readme more easy to read, especially comments in code and command line instructions<br>
 Make last use "amount metric" format because it is more intuitive<br>
-Make last have more time metrics, like month and year
-Make actual docs for how to use this and its commands, and cli
+Make last have more time metrics, like month and year<br>
+Make actual docs for how to use this and its commands, and cli<br>
