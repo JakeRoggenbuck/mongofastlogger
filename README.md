@@ -5,34 +5,34 @@ A simple and fask logging library that uses the power of mongodb to save and que
 ```sh
 # search
 search <tag> <logger_name>
-python3 runner.py search Info
+mongofastlogger search Info
 
 # clear
 clear <logger_name>
-python3 runner.py clear
+mongofastlogger clear
 
 # log
 log <tag> <message> <logger_name>
-python3 runner.py log Info "This is a log message"
+mongofastlogger log Info "This is a log message"
 
 # view
 view <logger_name>
-python3 runner.py view
+mongofastlogger view
 
 # export
 export <filename> <logger_name>
-python3 runner.py export filename.log
+mongofastlogger export filename.log
 
 # last
 last <metric> <amount> <logger_name>
-python3 runner.py last hours 3
+mongofastlogger last hours 3
 
 # help
 find commands
-python3 runner.py
+python3 mongofastlogger
 
 help with specific commands
-python3 runner.py command --help
+mongofastlogger command --help
 
 # other info
 <logger_name> is optional and is 'logs' by default
@@ -40,7 +40,7 @@ python3 runner.py command --help
 
 ## Library
 ```py
-from mongofastlogger.logger import LogViewer, Logger
+from mongofastlogger import LogViewer, Logger
 
 
 # Make logger

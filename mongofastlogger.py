@@ -3,6 +3,7 @@ from pymongo import MongoClient
 from datetime import datetime
 from termcolor import colored
 import arrow
+import fire
 
 
 class Database:
@@ -129,3 +130,41 @@ class LogViewer:
         for x in self.db.collection.find({}):
             # Printes lines with color
             print(self.generate_log_line(x, True))
+
+
+class Serpent(object):
+    def make_view_and_log(self, name):
+        self.logger = Logger(name)
+        self.viewer = LogViewer(name)
+
+    def search(self, tag, logger_name="logs"):
+        self.make_view_and_log(logger_name)
+        self.viewer.search_logs_by_tag(tag)
+
+    def clear(self, logger_name="logs"):
+        self.make_view_and_log(logger_name)
+        self.viewer.clear_data()
+
+    def log(self, tag, message, logger_name="logs"):
+        self.make_view_and_log(logger_name)
+        self.logger.log(tag, message)
+
+    def view(self, logger_name="logs"):
+        self.make_view_and_log(logger_name)
+        self.viewer.view_log()
+
+    def export(self, filename, logger_name="logs"):
+        self.make_view_and_log(logger_name)
+        self.viewer.export_log(filename)
+
+    def last(self, metric, amount, logger_name="logs"):
+        self.make_view_and_log(logger_name)
+        self.viewer.check_by_time(metric, amount)
+
+
+def run():
+    fire.Fire(Serpent)
+
+
+if __name__ == "__main__":
+    run()
