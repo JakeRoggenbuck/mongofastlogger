@@ -26,8 +26,6 @@ class Logger:
         """Setup database"""
         self.db = Database(collection)
 
-    def time(self):
-        """Get data and time"""
         return datetime.utcnow()
 
     def log(self, tag: str, message: str, display: bool = False):
@@ -38,7 +36,7 @@ class Logger:
         # Make document with time, tag, and message
         document = {
             "tag": tag,
-            "time": self.time(),
+            "time": arrow.utcnow(),
             "message": message,
             "line": linenum,
             "file": filename
@@ -60,13 +58,9 @@ class LogViewer:
 
     def generate_log_line(self, document: dict, color: bool = False):
         """Make log view"""
-        # Gets filename of logged file
         filename = document["file"]
-        # Gets line number of log
         linenum = document["line"]
-        # Get message
         message = document["message"]
-        # Get time and convert it to arrow
         time = arrow.get(document['time'])
         # Get time with full format
         full = time.format('HH:mm:ss MM-DD-YY')
