@@ -1,4 +1,4 @@
-<a href="https://pypi.org/project/mongo/">![Version](https://img.shields.io/pypi/v/mongofastlogger)</a>
+<a href="https://pypi.org/project/mongofastlogger/">![Version](https://img.shields.io/pypi/v/mongofastlogger)</a>
 
 # Logger
 A simple and fask logging library that uses the power of mongodb to save and query logs (with built in cli)
